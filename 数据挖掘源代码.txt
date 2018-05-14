@@ -1,0 +1,155 @@
+project 1
+
+y=magic04-ones*A
+cov=y'*y*(1/19025)
+
+sum=0
+for i=1:19020
+A=Z(i,:)'*Z(i,:)
+Sum1=sum1+A*(1/19020)
+end
+
+A  B
+b=cell2mat(B);
+for i=1:4
+cosa(i)=sum(A.*b(i,:))/(norm(A)*norm(b(i,:)));
+end
+maxa=max(cosa); 
+Maxa=0.9088
+X=var(magic04)
+X =1.0e+03 *
+
+project 2
+
+for m=1:4
+for n=1:4
+k(m,n)=iris(:,m)'*iris(:,n)
+end
+
+ Y=eye(4,4)-eye(4,4)/4
+C=Y*k*Y
+K2=zscore(Y) 
+
+X1=iris(:,1)
+X2=iris(:,2)
+X3=iris(:,3)
+x4=iris(:,4)
+function count = sta_submatrix1(a,b)  
+count = 0;  
+for i = 1:length(a)-length(b)+1  
+    c = a(i:i+length(b)-1);  
+    e = double(c==b);  
+    if(sum(e) == length(b))  
+        count = count + 1;  
+    end  
+end  
+end  
+
+
+
+project 3
+
+clear;
+
+ClomStatic=[1,2,3,25,26,27,53,54,55];
+len=length(ClomStatic)
+
+
+p=randperm(len);
+Temp=p(1:k);
+Center=zeros(1,k);
+for i=1:k
+    Center(i)=ClomStatic(Temp(i));
+end
+
+TempDistance=zeros(len,3);
+ while 1
+    
+    Circulm=1;
+    
+    p1=1;
+    p2=1;
+    p3=1;
+    
+    JudgeEqual=zeros(1,k);
+    if(Circulm~=1)
+        clear Group1 Group2 Group3;   
+    end
+    for i=1:len
+        for j=1:3
+            TempDistance(i,j)=abs(ClomStatic(i)-Center(j));
+        end
+        [RowMin RowIndex]=min(TempDistance(i,:));
+        if(RowIndex==1)
+            Group1(p1)=ClomStatic(i);
+            p1=p1+1;
+        elseif(RowIndex==2)
+            Group2(p2)=ClomStatic(i);
+            p2=p2+1;
+        elseif(RowIndex==3)
+            Group3(p3)=ClomStatic(i);
+            p3=p3+1;
+        end
+    end
+     
+        len1=length(Group1);
+        len2=length(Group2);
+        len3=length(Group3);
+        
+        
+        %计算Group1,Group2,Group3的均值
+        MeanGroup1=mean(Group1);
+        MeanGroup2=mean(Group2);
+        MeanGroup3=mean(Group3);
+
+        
+        %分别计算每个类中距离均值最近的一个点作为新的聚类中心
+        AbsGroup1=zeros(1,len1);
+        for t=1:len1
+            AbsGroup1(t)=floor(abs(Group1(t)-MeanGroup1));
+        end
+        [MaxAbsGroup1 MaxAbsGroup1Index]=min(AbsGroup1);
+        NewCenter(1)=Group1(MaxAbsGroup1Index);
+        clear AbsGroup1;
+
+        AbsGroup2=zeros(1,len2);
+        for t=1:len2
+            AbsGroup2(t)=floor(abs(Group2(t)-MeanGroup2));
+        end
+        [MaxAbsGroup2 MaxAbsGroup2Index]=min(AbsGroup2);
+        NewCenter(2)=Group2(MaxAbsGroup2Index);
+        clear AbsGroup2;
+          
+        AbsGroup3=zeros(1,len3);
+        for t=1:len3
+            AbsGroup3(t)=floor(abs(Group3(t)-MeanGroup3));
+        end
+        [MaxAbsGroup3 MaxAbsGroup3Index]=min(AbsGroup3);
+        NewCenter(3)=Group3(MaxAbsGroup2Index);
+        clear AbsGroup3;
+        
+        %判断新的类和旧类的聚类中心是否不同,不同则继续聚类,否则聚类结束
+        JudgeEqual=zeros(1,k);
+        for i=1:k
+            JudgeEqual=(NewCenter==Center);
+        end
+        
+        S=0;
+        for i=1:k
+            if(JudgeEqual(i)==1)
+                S=S+1;
+            end
+        end
+        
+        if(S==3)
+            break;
+        end
+        
+        Circulm=Circulm+1;
+  end
+
+
+
+
+
+  
